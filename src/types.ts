@@ -1,80 +1,38 @@
-import { AnyAction } from 'redux';
-import { ThunkDispatch } from 'redux-thunk';
+export type AuthUser = { id: string; email: string };
 
-export type InputType = {
+export type Rate = { name: string; ask: number };
+export type Rates = Record<string, Rate>;
+
+export type Expense = {
+  id: number,
+  value: number,
+  currency: string,
+  currencyName: string,
+  rate: number, // cotação (em BRL) usada no momento do lançamento
+  method: string,
+  tag: string,
+  description: string,
+};
+
+export type ExpenseDraft = {
+  value: string,
+  currency: string,
+  method: string,
+  tag: string,
+  description: string,
+};
+
+export type UserState = {
+  id: string | null,
   email: string,
-  password: string,
+  status: 'loading' | 'authenticated' | 'anonymous',
 };
 
-export type Response = {
-  [x: string]: {
-    code:string;
-    codein:string;
-    name:string;
-    high:string;
-    low:string;
-    varBid:string;
-    pctChange:string;
-    bid:string;
-    ask:string;
-    timestamp:string;
-    create_date:string;
-  }
+export type WalletState = {
+  ownerId: string | null, // dono das despesas carregadas (usado na persistência)
+  rates: Rates,
+  ratesStatus: 'idle' | 'loading' | 'ready' | 'error',
+  expenses: Expense[],
+  editingId: number | null,
+  displayCurrency: string,
 };
-
-export type ActionCurrency = {
-  type: string,
-  payload: Response,
-};
-
-export type GlobalStateType = {
-  user: {
-    email: string, // string que armazena o e-mail da pessoa usuária
-  },
-  wallet: {
-    currencies: string[], // array de string
-    expenses: ExpenseTypeCurr[], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
-    editor: boolean, // valor booleano que indica se uma despesa está sendo editada
-    idToEdit: number, // valor numérico que armazena o id da despesa que está sendo editada
-  }
-};
-
-export type CoinType = {
-  code:string,
-  codein:string,
-  name: string,
-  high:string,
-  low:string,
-  varBid:string,
-  pctChange:string,
-  bid:string,
-  ask:string,
-  timestamp:string,
-  create_date:string,
-};
-
-export type ReduxState = {
-  isFetching: boolean,
-  currencies: string,
-};
-
-export type ExpenseType = {
-  id: number,
-  value: string,
-  currency: string,
-  method: string,
-  tag: string,
-  description: string,
-};
-
-export type ExpenseTypeCurr = {
-  id: number,
-  value: string,
-  currency: string,
-  method: string,
-  tag: string,
-  description: string,
-  exchangeRates: Response,
-};
-
-export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;

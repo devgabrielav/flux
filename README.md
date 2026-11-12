@@ -1,34 +1,68 @@
-# Project Wallet Management
+# 💸 Fluxo
 
-# Context
-This is a Frontend project.
+Controle de gastos com **conversão de moedas em tempo real**. Registre despesas em qualquer moeda, veja tudo convertido para reais e acompanhe o total na moeda que preferir.
 
-In this project, the objective is to develop a spending control wallet with a currency converter. By using this application, the user is able to:
+## ✨ Funcionalidades
 
-- Add, remove and edit an expense.
-- View your expense table.
-- View total expenses converted to a currency of your choice.
+- Cadastro, edição e exclusão de despesas (descrição, valor, moeda, pagamento e categoria).
+- Cotação **travada no momento do lançamento**: o valor em reais não muda depois.
+- Total geral convertido para a moeda de sua escolha, com resumo por categoria.
+- Autenticação com e-mail e senha, rotas protegidas e despesas separadas por usuário.
+- Tema **dark** (padrão) com alternância para claro.
+- Layout responsivo: tabela no desktop, cartões no celular.
 
-## Used technologies
+## 🧰 Tecnologias
 
-Front-end:
-> Developed using: Typescript, Vite, React, Validator, React Router DOM and Redux.
-- ESLint was also used for cleaner code.
+React 18 · TypeScript · Vite · Redux Toolkit · React Router · Supabase Auth (opcional) · Vitest + Testing Library · cotações da [AwesomeAPI](https://docs.awesomeapi.com.br/api-de-moedas).
 
-Fetched API (Coin converter):
-> Economia Awesome API.
-
-## Installing Dependencies
-
-> After cloning the project
+## 🚀 Como rodar
 
 ```bash
-cd wallet-management
 npm install
+npm run dev        # http://localhost:3000
 ```
 
-## Running the application
-    
-  ```
-  npm run dev
-  ```
+| Script | O que faz |
+| --- | --- |
+| `npm run dev` | servidor de desenvolvimento |
+| `npm run build` | checagem de tipos + build de produção |
+| `npm test` | testes (Vitest) |
+| `npm run lint` | ESLint |
+
+## 🔐 Autenticação
+
+Um app só de front-end **não consegue** proteger senhas sozinho: qualquer verificação feita no navegador pode ser contornada. O caminho simples e seguro é delegar o login a um provedor. O Fluxo usa o [Supabase Auth](https://supabase.com/auth) (plano gratuito), que cuida de hash de senha, sessão, renovação de token e confirmação de e-mail.
+
+**Modo seguro (Supabase)**
+
+1. Crie um projeto em supabase.com.
+2. Copie `.env.example` para `.env` e preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` (Project Settings → API). A chave `anon` é pública por design.
+3. Reinicie o `npm run dev`. Em *Authentication → Providers*, deixe *Email* ativo.
+
+**Modo demo (sem configuração)**
+
+Sem as variáveis acima, o app cria contas locais no navegador (senha com PBKDF2 + salt, sessão por aba). Serve para testar a interface, **não** para uso real.
+
+> As despesas ficam no `localStorage` do navegador, separadas por usuário. Para sincronizar entre dispositivos, o próximo passo natural é salvá-las no Supabase com Row Level Security.
+
+## 🗂️ Estrutura
+
+```
+src/
+├── auth/         # provedores de login (supabase e demo) atrás da mesma interface
+├── components/   # Header, Summary, ExpenseForm, ExpenseList, ...
+├── pages/        # Login e Wallet
+├── redux/        # store, slices (user, wallet) e persistência
+├── api.ts        # busca de cotações
+└── tests/        # helpers de teste
+```
+
+## 🛠️ O que mudou em relação à versão anterior
+
+- Redux clássico → **Redux Toolkit** (menos código, estado imutável com Immer).
+- Cada despesa guarda só a cotação usada, em vez de todas as moedas.
+- IDs não se repetem mais após exclusões.
+- Validação do login corrigida (antes reagia um caractere atrasada).
+- Formulário de edição agora preenche moeda, pagamento e categoria.
+- Moeda BRL disponível para lançamentos; erros de rede tratados.
+- Total em qualquer moeda, rotas protegidas e persistência por usuário.

@@ -1,17 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
-import './index.css';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import store from './redux';
+import './index.css';
+import { store } from './redux';
+import { attachPersistence } from './redux/persist';
 
-ReactDOM
-  .createRoot(document.getElementById('root') as HTMLElement)
-  .render(
+attachPersistence(store);
+
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
     <Provider store={ store }>
-      <BrowserRouter>
+      <BrowserRouter future={ { v7_startTransition: true, v7_relativeSplatPath: true } }>
         <App />
       </BrowserRouter>
-    </Provider>,
-  );
+    </Provider>
+  </React.StrictMode>,
+);
