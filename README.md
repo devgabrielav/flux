@@ -56,13 +56,3 @@ src/
 ├── api.ts        # busca de cotações
 └── tests/        # helpers de teste
 ```
-
-## 🛠️ O que mudou em relação à versão anterior
-
-- Redux clássico → **Redux Toolkit** (menos código, estado imutável com Immer).
-- Cada despesa guarda só a cotação usada, em vez de todas as moedas.
-- IDs não se repetem mais após exclusões.
-- Validação do login corrigida (antes reagia um caractere atrasada).
-- Formulário de edição agora preenche moeda, pagamento e categoria.
-- Moeda BRL disponível para lançamentos; erros de rede tratados.
-- Total em qualquer moeda, rotas protegidas e persistência por usuário.
