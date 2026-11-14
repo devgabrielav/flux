@@ -2,6 +2,10 @@
 
 Flux is a personal finance tracker built to help people control spending across multiple currencies. It allows users to log expenses in their preferred currency, keep the exchange rate fixed at the moment each entry is created, and review totals in the currency they want to monitor. The app is designed to make day-to-day budgeting clearer, especially for users who deal with international transactions or multiple spending categories.
 
+## 🌐 Live demo
+
+- Deploy: https://flux-xdmo.onrender.com/
+
 ## ✨ Features
 
 - Add, edit, and remove expenses with description, amount, currency, payment method, and category.
@@ -35,10 +39,6 @@ Mobile
 </table>
 
 ---
-
-## 🌐 Live demo
-
-- Deploy: https://flux-xdmo.onrender.com/
 
 ## 🧰 Tech stack
 
