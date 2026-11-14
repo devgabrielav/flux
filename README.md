@@ -11,6 +11,31 @@ Flux is a personal finance tracker built to help people control spending across 
 - Toggle between dark and light themes.
 - Enjoy a responsive UI with table layout on larger screens and card layout on mobile.
 
+## 📸 Screenshots
+
+Desktop
+<p align="center">
+  <td>
+    <img src="assets/flux-1.png" alt="Flux desktop dashboard showing expense totals and entries" width="100%" />
+  </td>
+  <td>
+    <img src="assets/flux-2.png" alt="Flux mobile expense form for entering amounts and categories" width="100%" />
+  </td>
+</p>
+
+Mobile
+<table>
+  <tr>
+  <td>
+    <img src="assets/flux-3.png" alt="Flux desktop overview with category summary and spending details" width="100%" />
+  <td>
+    <img src="assets/flux-4.png" alt="Flux mobile wallet summary and breakdown by category" width="100%" />
+  </td>
+  </tr>
+</table>
+
+---
+
 ## 🌐 Live demo
 
 - Deploy: https://flux-xdmo.onrender.com/
